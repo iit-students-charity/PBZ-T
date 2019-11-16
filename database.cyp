@@ -1,0 +1,51 @@
+CREATE
+  (do: Note { name: "До", alter_ego: "Cиb" }),
+  (do_dies: Note { name: "До#", alter_ego: "Реb"}),
+  (re: Note { name: "Ре" }),
+  (re_dies: Note { name: "Ре#", alter_ego: "Миb"}),
+  (mi: Note { name: "Ми", alter_ego: "Фаb" }),
+  (fa: Note { name: "Фа", alter_ego: "Ми#" }),
+  (fa_dies: Note { name: "Фа#", alter_ego: "Сольb"}),
+  (sol: Note { name: "Соль" }),
+  (sol_dies: Note { name: "Соль#", alter_ego: "Ляb"}),
+  (lya: Note { name: "Ля" }),
+  (lya_dies: Note { name: "Ля#", alter_ego: "Сиb"}),
+  (ti: Note { name: "Си", alter_ego: "Доb" }),
+
+  (do_major: Key { name: "До", lad: "Мажор" }),
+  (do_major) -[:TONIC]-> (do),
+  (do_major) -[:SUBDOMINANT]-> (fa),
+  (do_major) -[:DOMINANT]-> (sol),
+
+  (lya_minor: Key { name: "Ля", lad: "Минор" }),
+  (lya_minor) -[:TONIC]-> (lya),
+  (lya_minor) -[:SUBDOMINANT]-> (re),
+  (lya_minor) -[:DOMINANT]-> (mi),
+
+  (re_minor: Key { name: "Ре", lad: "Минор" }),
+  (re_minor) -[:TONIC]-> (re),
+  (re_minor) -[:SUBDOMINANT]-> (sol),
+  (re_minor) -[:DOMINANT]-> (lya),
+
+  (ch_lya_minor: Chord { name: "Ля", lad: "Минор" }),
+  (ch_lya_minor) -[:NOTE]-> (lya),
+  (ch_lya_minor) -[:NOTE]-> (do),
+  (ch_lya_minor) -[:NOTE]-> (mi),
+
+  (ch_do_major: Chord { name: "До", lad: "Мажор" }),
+  (ch_do_major) -[:NOTE]-> (do),
+  (ch_do_major) -[:NOTE]-> (mi),
+  (ch_do_major) -[:NOTE]-> (sol),
+  
+  (ch_re_sus_4: Chord { name: "Ре", lad: "Сус4" }),
+  (ch_re_sus_4) -[:NOTE]-> (re),
+  (ch_re_sus_4) -[:NOTE]-> (sol),
+  (ch_re_sus_4) -[:NOTE]-> (lya),
+
+  (ch_do_9: Chord { name: "До", lad: "9" }),
+  (ch_do_9) -[:NOTE]-> (do),
+  (ch_do_9) -[:NOTE]-> (mi),
+  (ch_do_9) -[:NOTE]-> (sol),
+  (ch_do_9) -[:NOTE]-> (lya_dies),
+  (ch_do_9) -[:NOTE]-> (re),
+  (ch_do_9) -[:NOTE]-> (fa_dies)
