@@ -1,5 +1,5 @@
 CREATE
-  (do: Note { name: "До", alter_ego: "Cиb" }),
+  (do: Note { name: "До", alter_ego: "Cи#" }),
   (do_dies: Note { name: "До#", alter_ego: "Реb"}),
   (re: Note { name: "Ре" }),
   (re_dies: Note { name: "Ре#", alter_ego: "Миb"}),
@@ -12,20 +12,25 @@ CREATE
   (lya_dies: Note { name: "Ля#", alter_ego: "Сиb"}),
   (ti: Note { name: "Си", alter_ego: "Доb" }),
 
-  (do_major: Key { name: "До", lad: "Мажор" }),
+  (do_major: Key { name: "До", ton_lad: "Мажор" }),
   (do_major) -[:TONIC]-> (do),
   (do_major) -[:SUBDOMINANT]-> (fa),
   (do_major) -[:DOMINANT]-> (sol),
 
-  (lya_minor: Key { name: "Ля", lad: "Минор" }),
+  (lya_minor: Key { name: "Ля", ton_lad: "Минор" }),
   (lya_minor) -[:TONIC]-> (lya),
   (lya_minor) -[:SUBDOMINANT]-> (re),
   (lya_minor) -[:DOMINANT]-> (mi),
 
-  (re_minor: Key { name: "Ре", lad: "Минор" }),
+  (re_minor: Key { name: "Ре", ton_lad: "Минор" }),
   (re_minor) -[:TONIC]-> (re),
   (re_minor) -[:SUBDOMINANT]-> (sol),
   (re_minor) -[:DOMINANT]-> (lya),
+
+  (sol_major: Key { name: "Соль", ton_lad: "Мажор" }),
+  (sol_major) -[:TONIC]-> (sol),
+  (sol_major) -[:SUBDOMINANT]-> (do),
+  (sol_major) -[:DOMINANT]-> (re),
 
   (ch_lya_minor: Chord { name: "Ля", lad: "Минор" }),
   (ch_lya_minor) -[:NOTE]-> (lya),
@@ -48,4 +53,19 @@ CREATE
   (ch_do_9) -[:NOTE]-> (sol),
   (ch_do_9) -[:NOTE]-> (lya_dies),
   (ch_do_9) -[:NOTE]-> (re),
-  (ch_do_9) -[:NOTE]-> (fa_dies)
+  (ch_do_9) -[:NOTE]-> (fa_dies),
+
+  (re_major: Chord { name: "Ре", lad: "Мажор" }),
+  (mi_minor: Chord { name: "Ми", lad: "Минор" }),
+  (ch_sol_major: Chord { name: "Соль", lad: "Мажор" }),
+
+  (peremen: Song { name: "Перемен", author: "Цой" }),
+  (peremen) -[:KEY]-> (do_major),
+  
+  (too_much_love_will_kill_you: Song { name: "Too much love will kill you", author: "Brian May", singer: "Freddie Mercury" }),
+  (too_much_love_will_kill_you) -[:KEY]-> (sol_major),
+  (too_much_love_will_kill_you) -[:CHORD]-> (ch_do_major),
+  (too_much_love_will_kill_you) -[:CHORD]-> (ch_lya_minor),
+  (too_much_love_will_kill_you) -[:CHORD]-> (ch_sol_major),
+  (too_much_love_will_kill_you) -[:CHORD]-> (mi_minor),
+  (too_much_love_will_kill_you) -[:CHORD]-> (re_major)
